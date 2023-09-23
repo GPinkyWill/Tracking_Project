@@ -4,17 +4,21 @@ class Veiculo
  
  float maxForce, maxSpeed, r;
  PVector pos, vel, acc;
+ float cr,cg,cb;
  
  
  //construtor
  Veiculo(int x,int y)
  {
    pos = new PVector(x,y);
-   vel = new PVector(2,0);
+   vel = new PVector(0,0);
    acc = new PVector(0,0);
-   maxSpeed = 6;
+   maxSpeed = 4;
    maxForce = 0.1;
    r = 16;
+   cr = int(random(50,200));
+   cg = int(random(50,200));
+   cb = int(random(50,200));
    
  }
  //funções
@@ -30,13 +34,13 @@ class Veiculo
      future.add(pos);
      fill(255,0,0);
      noStroke();
-     circle(future.x, future.y, 16);
+     //circle(future.x, future.y, 16);
      
      //Step 2 Is future on path?
      PVector target = findProjection(path.start, future, path.end);
      fill(0,255,0);
      noStroke();
-     circle(target.x, target.y, 16);
+     //circle(target.x, target.y, 16);
      
      float d = PVector.dist(future,target);
      if(d > path.radius)
@@ -84,9 +88,9 @@ class Veiculo
    }
    void show()
    {
-     stroke(255);
+     stroke(cr,cg,cb);
      strokeWeight(2);
-     fill(255);
+     fill(cr,cg,cb);
      push();
      translate(pos.x, pos.y);
      rotate(vel.heading());
@@ -99,12 +103,14 @@ class Veiculo
      if(this.pos.x > width + this.r)
      {
        this.pos.x = -this.r;
-       pos.y =  random(100,500);
+       pos.y =  (int)random(height/2-200, height/2+200);
+       println(pos.y);
      }
      else if(this.pos.x < -this.r)
      {
        this.pos.x = width + this.r;
-       pos.y = random(100,500);
+       pos.y = random(height/2-100,height/2+100);
+       
      }
      if(this.pos.y > height + this.r)
      {
