@@ -4,7 +4,7 @@ Caminho path;
 void setup()
 {
   size(500,500);
-  nave = new Veiculo();
+  nave = new Veiculo(0,200);
   path = new Caminho(0,250,width,250);
 }
 
@@ -16,7 +16,8 @@ void draw()
   PVector force = nave.follow(path);
   nave.applyForce(force);
   
-  path.display();
-  nave.display();
-  nave.movimenta();
+  path.show();
+  nave.update();
+  nave.show();
+  nave.edges();
 }
